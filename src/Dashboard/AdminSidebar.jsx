@@ -5,7 +5,8 @@ import {
     ClipboardList, DollarSign, Settings, FileText, 
     HelpCircle, TrendingUp, Home, LogOut, 
     CreditCard,
-    Bike
+    Bike,
+    UsersIcon
 } from 'lucide-react';  
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../context/AuthContext/AuthContext';
@@ -19,6 +20,7 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
     // Main navigation items
     const menuItems = [
         { path: '/dashboard', icon: <LayoutDashboard size={18} />, label: 'Dashboard' },
+        { path: '/dashboard/users-management', icon: <UsersIcon size={18} />, label: 'All Users' },
         { path: '/dashboard/parcels', icon: <Package size={18} />, label: 'All Parcels' },
         // { path: '/dashboard/riders', icon: <Truck size={18} />, label: 'Delivery Riders' },
         // { path: '/dashboard/customers', icon: <Users size={18} />, label: 'Customers' },

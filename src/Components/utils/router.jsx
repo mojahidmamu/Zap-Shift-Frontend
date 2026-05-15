@@ -23,7 +23,8 @@ import PaymentCancel from "../../Dashboard/Payment/PaymentCancel";
 import PaymentHistory from "../../Dashboard/Payment/PaymentHistory"; 
 import RiderForm from "../RiderForm/RiderForm";
 import PrivateRoute from "../Auth/PrivateRoute/PrivateRoute";
-import RiderApplications from "../../Dashboard/RiderApplications";
+import RiderApplications from "../../Dashboard/RiderApplications"; 
+import UserManagement from "../../Dashboard/AllUser/UserManagement";
 
 
 // Add error handling for fetch requests
@@ -150,6 +151,7 @@ export const router = createBrowserRouter([
                     { path: "payment-cancelled", element: <PaymentCancel /> }, 
                     { path: "payment-history", element: <PaymentHistory  /> }, 
                     { path: "rider-applications", element: <RiderApplications /> },
+                    { path: "users-management", element: <UserManagement /> },
                     // Add more dashboard pages here:
                     // { path: "transactions", element: <Transactions /> },
                     // { path: "pending", element: <PendingApproval /> },
