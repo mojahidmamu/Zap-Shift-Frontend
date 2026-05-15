@@ -101,7 +101,7 @@ const RiderApplications = () => {
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">🚚 রাইডার আবেদনসমূহ</h1>
-        <div className="flex items-center gap-2">
+        {/* <div className="flex items-center gap-2">
           <Filter size={18} />
           <select
             value={statusFilter}
@@ -113,10 +113,10 @@ const RiderApplications = () => {
             <option value="approved">অনুমোদিত</option>
             <option value="rejected">প্রত্যাখ্যাত</option>
           </select>
-        </div>
+        </div> */}
       </div>
 
-      {applications.length === 0 ? (
+      {/* {applications.length === 0 ? (
         <div className="text-center text-gray-500 py-12">কোনো আবেদন পাওয়া যায়নি</div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -152,7 +152,7 @@ const RiderApplications = () => {
             </div>
           ))}
         </div>
-      )}
+      )} */}
     </div>
   );
 };

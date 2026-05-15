@@ -149,7 +149,7 @@ export const router = createBrowserRouter([
                     { path: "payment-success", element: <PaymentSuccess /> }, 
                     { path: "payment-cancelled", element: <PaymentCancel /> }, 
                     { path: "payment-history", element: <PaymentHistory  /> }, 
-                    { path: "rider-application", element: <RiderApplications /> },
+                    { path: "rider-applications", element: <RiderApplications /> },
                     // Add more dashboard pages here:
                     // { path: "transactions", element: <Transactions /> },
                     // { path: "pending", element: <PendingApproval /> },

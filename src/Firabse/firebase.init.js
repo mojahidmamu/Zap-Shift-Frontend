@@ -36,20 +36,25 @@ export const googleProvider = new GoogleAuthProvider();
 // Google Sign In
 export const signInWithGoogle = async () => {
     try {
-        const result = await signInWithPopup(auth, googleProvider);
-        return { user: result.user, error: null };
+        const provider = new GoogleAuthProvider();
+        const userCredential = await signInWithPopup(auth, provider);
+        const user = userCredential.user;
+        const token = await user.getIdToken(); // 🔥 Get Firebase token
+        return { user, token, error: null };
     } catch (error) {
-        return { user: null, error: error.message };
+        return { user: null, token: null, error: error.message };
     }
 };
 
 // Email/Password Sign In
 export const signInWithEmail = async (email, password) => {
     try {
-        const result = await signInWithEmailAndPassword(auth, email, password);
-        return { user: result.user, error: null };
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        const token = await user.getIdToken(); // 🔥 Get Firebase token
+        return { user, token, error: null };
     } catch (error) {
-        return { user: null, error: error.message };
+        return { user: null, token: null, error: error.message };
     }
 };
 
