@@ -30,7 +30,7 @@ const UserManagement = () => {
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             return res.data;
-        },
+        }, 
         onSuccess: () => {
             queryClient.invalidateQueries(['users']);
             toast.success('Role updated successfully!');

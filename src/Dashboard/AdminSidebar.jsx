@@ -11,8 +11,10 @@ import {
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../context/AuthContext/AuthContext';
 import { logoutUser } from '../Firabse/firebase.init';
+import useRole from '../hook/useRole';
 
 const AdminSidebar = ({ isOpen, setIsOpen }) => {
+    const { role, isLoading } = useRole();
     const location = useLocation();
     const navigate = useNavigate();
     const { setUser } = useContext(AuthContext);
@@ -20,6 +22,15 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
     // Main navigation items
     const menuItems = [
         { path: '/dashboard', icon: <LayoutDashboard size={18} />, label: 'Dashboard' },
+        //  ...(role === 'admin'
+        //     ? [
+        //         {
+        //         path: '/dashboard/users-management',
+        //         icon: <UsersIcon size={18} />,
+        //         label: 'All Users',
+        //         },
+        //     ]
+        //     : []), 
         { path: '/dashboard/users-management', icon: <UsersIcon size={18} />, label: 'All Users' },
         { path: '/dashboard/parcels', icon: <Package size={18} />, label: 'All Parcels' },
         // { path: '/dashboard/riders', icon: <Truck size={18} />, label: 'Delivery Riders' },
