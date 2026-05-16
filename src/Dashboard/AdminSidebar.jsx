@@ -12,6 +12,7 @@ import { toast } from 'react-hot-toast';
 import { AuthContext } from '../context/AuthContext/AuthContext';
 import { logoutUser } from '../Firabse/firebase.init';
 import useRole from '../hook/useRole';
+import { RiEBike2Fill, RiEBikeFill } from 'react-icons/ri';
 
 const AdminSidebar = ({ isOpen, setIsOpen }) => {
     const { role, isLoading } = useRole();
@@ -38,6 +39,7 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
         { path: '/dashboard/tracking', icon: <MapPin size={18} />, label: 'Live Tracking' },
         { path: '/dashboard/payment-history', icon: <CreditCard size={18} />, label: 'Payment History' },
         { path: '/dashboard/rider-applications', icon: <Bike size={18} />, label: 'Rider Applications' },
+        { path: '/dashboard/assgin-riders', icon: <RiEBike2Fill  size={18} /> , label: 'Assign Rider' },
         
         // { path: '/dashboard/orders', icon: <ClipboardList size={18} />, label: 'Orders' },
         // { path: '/dashboard/earnings', icon: <DollarSign size={18} />, label: 'Earnings' },

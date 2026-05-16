@@ -26,6 +26,7 @@ import PrivateRoute from "../Auth/PrivateRoute/PrivateRoute";
 import RiderApplications from "../../Dashboard/RiderApplications"; 
 import UserManagement from "../../Dashboard/AllUser/UserManagement";
 import AdminRoute from "./AdminRoute";
+import AssignRider from "../../Dashboard/AssignRider/AssignRider";
 
 
 // Add error handling for fetch requests
@@ -154,7 +155,7 @@ export const router = createBrowserRouter([
                     { path: "rider-applications", element: <RiderApplications /> },
                     // { path: "users-management", element: <AdminRoute> <UserManagement></UserManagement>  </AdminRoute> },
                     { path: "users-management", element:   <UserManagement></UserManagement> },
-                    // Add more dashboard pages here:
+                    { path: "assgin-riders", element:   <AssignRider></AssignRider> },
                     // { path: "transactions", element: <Transactions /> },
                     // { path: "pending", element: <PendingApproval /> },
                 ],
