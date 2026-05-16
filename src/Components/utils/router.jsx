@@ -25,6 +25,7 @@ import RiderForm from "../RiderForm/RiderForm";
 import PrivateRoute from "../Auth/PrivateRoute/PrivateRoute";
 import RiderApplications from "../../Dashboard/RiderApplications"; 
 import UserManagement from "../../Dashboard/AllUser/UserManagement";
+import AdminRoute from "./AdminRoute";
 
 
 // Add error handling for fetch requests
@@ -151,7 +152,7 @@ export const router = createBrowserRouter([
                     { path: "payment-cancelled", element: <PaymentCancel /> }, 
                     { path: "payment-history", element: <PaymentHistory  /> }, 
                     { path: "rider-applications", element: <RiderApplications /> },
-                    { path: "users-management", element: <UserManagement /> },
+                    { path: "users-management", element: <AdminRoute> <UserManagement></UserManagement>  </AdminRoute> },
                     // Add more dashboard pages here:
                     // { path: "transactions", element: <Transactions /> },
                     // { path: "pending", element: <PendingApproval /> },

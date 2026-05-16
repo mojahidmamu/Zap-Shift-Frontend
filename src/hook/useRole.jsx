@@ -6,7 +6,7 @@ const useRole = () => {
     const {user} = useAuth();
     const token = localStorage.getItem('token');
 
-    const {isLoading ,  data: role = 'user'} = useQuery({
+    const {roleLoading ,  data: role = 'user'} = useQuery({
         queryKey: ['users', user?.email],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/users/${user?.email}`, {
@@ -18,7 +18,7 @@ const useRole = () => {
         }
     });
 
-    return { role, isLoading };
+    return { role, roleLoading };
 };
 
 export default useRole;
