@@ -6,7 +6,8 @@ import {
     HelpCircle, TrendingUp, Home, LogOut, 
     CreditCard,
     Bike,
-    UsersIcon
+    UsersIcon,
+    UserStar
 } from 'lucide-react';  
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../context/AuthContext/AuthContext';
@@ -22,31 +23,8 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
 
     // Main navigation items
     const menuItems = [
-        { path: '/dashboard', icon: <LayoutDashboard size={18} />, label: 'Dashboard' },
-        //  ...(role === 'admin'
-        //     ? [
-        //         {
-        //         path: '/dashboard/users-management',
-        //         icon: <UsersIcon size={18} />,
-        //         label: 'All Users',
-        //         },
-        //     ]
-        //     : []), 
-        { path: '/dashboard/users-management', icon: <UsersIcon size={18} />, label: 'All Users' },
-        { path: '/dashboard/parcels', icon: <Package size={18} />, label: 'All Parcels' },
-        // { path: '/dashboard/riders', icon: <Truck size={18} />, label: 'Delivery Riders' },
-        // { path: '/dashboard/customers', icon: <Users size={18} />, label: 'Customers' },
-        { path: '/dashboard/tracking', icon: <MapPin size={18} />, label: 'Live Tracking' },
-        { path: '/dashboard/payment-history', icon: <CreditCard size={18} />, label: 'Payment History' },
-        { path: '/dashboard/rider-applications', icon: <Bike size={18} />, label: 'Rider Applications' },
-        { path: '/dashboard/assgin-riders', icon: <RiEBike2Fill  size={18} /> , label: 'Assign Rider' },
+        { path: '/admin-dashboard/admin', icon: <UserStar size={18} />, label: 'Admin' }, 
         
-        // { path: '/dashboard/orders', icon: <ClipboardList size={18} />, label: 'Orders' },
-        // { path: '/dashboard/earnings', icon: <DollarSign size={18} />, label: 'Earnings' },
-        // { path: '/dashboard/statistics', icon: <TrendingUp size={18} />, label: 'Statistics' },
-        // { path: '/dashboard/disputes', icon: <HelpCircle size={18} />, label: 'Disputes' },
-        // { path: '/dashboard/reports', icon: <FileText size={18} />, label: 'Reports' },
-        { path: '/dashboard/settings', icon: <Settings size={18} />, label: 'Settings' },
     ];
 
     // Bottom action items
@@ -87,7 +65,7 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
             <div className="flex items-center justify-center p-4 border-b border-gray-700 h-16">
                 {isOpen ? (
                     <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        Zap Shift-USER
+                        Zap Shift Admin
                     </span>
                 ) : (
                     <span className="text-2xl">📦</span>

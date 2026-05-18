@@ -27,6 +27,8 @@ import RiderApplications from "../../Dashboard/RiderApplications";
 import UserManagement from "../../Dashboard/AllUser/UserManagement";
 import AdminRoute from "./AdminRoute";
 import AssignRider from "../../Dashboard/AssignRider/AssignRider";
+import RiderDashboardLayout from "../../RiderDashboardLayout/RiderDashboardLayout";
+import AdminDashboardLayout from "../../AdminDashboardLayout/AdminDashboardLayout";
 
 
 // Add error handling for fetch requests
@@ -136,6 +138,7 @@ export const router = createBrowserRouter([
       }
     ]
   }, 
+  // User Dashboard
   {
     path: "/dashboard",
     element: <ProtectedRoute></ProtectedRoute>,
@@ -156,14 +159,40 @@ export const router = createBrowserRouter([
                     // { path: "users-management", element: <AdminRoute> <UserManagement></UserManagement>  </AdminRoute> },
                     { path: "users-management", element:   <UserManagement></UserManagement> },
                     { path: "assgin-riders", element:   <AssignRider></AssignRider> },
-                    // { path: "transactions", element: <Transactions /> },
-                    // { path: "pending", element: <PendingApproval /> },
                 ],
             },
             // {
             //   path: "/payment/:percelId",
             //   element: <Payment />,
             // }
+        ],
+  },
+  // Rider Dashboard Route: 
+  {
+    path: "/rider-dashboard",
+    element: <ProtectedRoute></ProtectedRoute>,
+    children: [
+            {
+                element: <RiderDashboardLayout></RiderDashboardLayout>  ,
+                children: [
+                    { index: true, element: <Overview /> },
+                    { index: "dashboard", element: <Overview /> },
+                ],
+            }, 
+        ],
+  }, 
+  // Admin Dashboard: 
+  {
+    path: "/admin-dashboard",
+    element: <ProtectedRoute></ProtectedRoute>,
+    children: [
+            {
+                element:  <AdminDashboardLayout></AdminDashboardLayout>,
+                children: [
+                    { index: true, element: <Overview /> },
+                    { index: "dashboard", element: <Overview /> },
+                ],
+            }, 
         ],
   }
 ]);

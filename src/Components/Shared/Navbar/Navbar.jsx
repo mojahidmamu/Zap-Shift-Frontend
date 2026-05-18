@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom"; 
 import { useContext, useEffect, useRef, useState } from "react";
-import { Sun, Moon, LogOut, User, Settings, ChevronDown } from "lucide-react";
+import { Sun, Moon, LogOut, User, Settings, ChevronDown, UsersIcon, Bike, UserStar } from "lucide-react";
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom'; 
 import { toast } from 'react-hot-toast';
@@ -213,17 +213,39 @@ const NavBar = () => {
                                         </p>
                                     </div>
                                     
-                                    {/* Dashboard Link */}
+                                    {/* User Dashboard Link */}
                                     <Link
                                         to="/dashboard"
                                         onClick={() => setIsUserMenuOpen(false)}
                                         className="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-purple-600 hover:text-white transition-colors"
                                     >
-                                        <User className="w-4 h-4" />
-                                        Dashboard
+                                        <UsersIcon className="w-4 h-4" />
+                                        User Dashboard
                                     </Link>
-                                    
-                                    
+                                    {/* Divider */}
+                                    <div className="border-t border-gray-700 my-1"></div>
+
+                                    {/* Rider Dashboard */}
+                                    <Link
+                                        to="/rider-dashboard"
+                                        onClick={() => setIsUserMenuOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-2 text-gray-300 hover:bg-purple-600 hover:text-white transition-colors"
+                                    >
+                                        <Bike className="w-4 h-4" />
+                                        Rider Dashboard
+                                    </Link>
+                                    {/* Divider */}
+                                    <div className="border-t border-gray-700 my-1"></div>
+
+                                    {/* Admin Dashboard */}
+                                    <Link
+                                        to="/admin-dashboard"
+                                        onClick={() => setIsUserMenuOpen(false)}
+                                        className="flex font-bold underline items-center gap-3 px-4 py-2 text-gray-300 hover:bg-purple-600 hover:text-white transition-colors"
+                                    >
+                                        <UserStar className="w-4 h-4" />
+                                        Admin Dashboard
+                                    </Link>
                                     {/* Divider */}
                                     <div className="border-t border-gray-700 my-1"></div>
                                     

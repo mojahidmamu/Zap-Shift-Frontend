@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Menu } from 'lucide-react';
-import AdminSidebar from './AdminSidebar';
+import { Menu } from 'lucide-react';  
+import RiderSidebar from './RiderSidebar';
 
-const DashboardLayout = () => {
+const RiderDashboardLayout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true);
 
     return (
         <div className="flex min-h-screen bg-gray-100">
             {/* Sidebar */}
-            <AdminSidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
+            <RiderSidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
 
             {/* Main content area with dynamic margin based on sidebar state */}
             <div className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-20'}`}>
@@ -18,7 +18,7 @@ const DashboardLayout = () => {
                     <button onClick={() => setSidebarOpen(!sidebarOpen)} className="focus:outline-none">
                         <Menu className="w-5 h-5 text-gray-700" />
                     </button>
-                    <h1 className="ml-4 font-semibold text-gray-800">User Dashboard</h1>
+                    <h1 className="ml-4 font-semibold text-gray-800">Rider Dashboard</h1>
                 </div>
 
                 {/* Page content - nested routes will render here */}
@@ -30,4 +30,4 @@ const DashboardLayout = () => {
     );
 };
 
-export default DashboardLayout;
+export default RiderDashboardLayout;
