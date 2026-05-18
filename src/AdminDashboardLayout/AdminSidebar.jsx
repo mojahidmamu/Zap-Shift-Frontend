@@ -23,7 +23,7 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
 
     // Main navigation items
     const menuItems = [
-        { path: '/admin-dashboard/admin', icon: <UserStar size={18} />, label: 'Admin' }, 
+        { path: '/admin-dashboard', icon: <UserStar size={18} />, label: 'Admin' }, 
         
     ];
 

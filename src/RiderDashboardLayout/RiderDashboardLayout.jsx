@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Menu } from 'lucide-react';  
+import { Menu } from 'lucide-react'; 
 import RiderSidebar from './RiderSidebar';
 
-const RiderDashboardLayout = () => {
+const DashboardLayout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true);
 
     return (
@@ -30,4 +30,5 @@ const RiderDashboardLayout = () => {
     );
 };
 
-export default RiderDashboardLayout;
+export default DashboardLayout;
+ 

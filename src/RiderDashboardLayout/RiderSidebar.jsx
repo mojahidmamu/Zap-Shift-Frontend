@@ -1,42 +1,32 @@
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { 
-    LayoutDashboard, Package, Truck, Users, MapPin, 
-    ClipboardList, DollarSign, Settings, FileText, 
-    HelpCircle, TrendingUp, Home, LogOut, 
-    CreditCard,
-    Bike,
-    UsersIcon
-} from 'lucide-react';  
+import { Home, LogOut } from 'lucide-react';
 import { toast } from 'react-hot-toast';
-import { AuthContext } from '../context/AuthContext/AuthContext';
+import { RiEBike2Fill } from 'react-icons/ri'; 
 import { logoutUser } from '../Firabse/firebase.init';
-import useRole from '../hook/useRole';
-import { RiEBike2Fill, RiEBikeFill } from 'react-icons/ri';
+import { AuthContext } from '../context/AuthContext/AuthContext';
 
-const RiderSidebar = ({ isOpen, setIsOpen }) => {
-    const { role, isLoading } = useRole();
+const RiderSidebar = ({ isOpen }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const { setUser } = useContext(AuthContext);
 
-    // Main navigation items
+    // ✅ Navigation items
     const menuItems = [
-        { path: '/dashboard/rider-applications', icon: <Bike size={18} />, label: 'Rider Applications' }, 
-        
+        { path: '/rider-dashboard', icon: <RiEBike2Fill size={18} />, label: 'Rider Applications' },
+        // { path: '/rider-dashboard/assign-riders', icon: <RiEBike2Fill size={18} />, label: 'Assign Rider' },
     ];
 
-    // Bottom action items
+    // ✅ Bottom actions
     const bottomActions = [
         { path: '/', icon: <Home size={18} />, label: 'Home', action: 'navigate' },
-        { path: '#', icon: <LogOut className='text-red-600' size={18} />,  label: 'Logout', action: 'logout' ,  isRed: true },
+        { icon: <LogOut className="text-red-600" size={18} />, label: 'Logout', action: 'logout', isRed: true },
     ];
 
-    const isActive = (path) => {
-        if (path === '/dashboard') return location.pathname === '/dashboard';
-        return location.pathname.startsWith(path);
-    };
+    // ✅ Active route check
+    const isActive = (path) => location.pathname.startsWith(path);
 
+    // ✅ Logout handler
     const handleLogout = async () => {
         const { success, error } = await logoutUser();
         if (success) {
@@ -44,10 +34,11 @@ const RiderSidebar = ({ isOpen, setIsOpen }) => {
             toast.success('Logged out successfully!', { position: 'top-center' });
             navigate('/');
         } else {
-            toast.error(error, { position: 'top-center' });
+            toast.error(error || 'Logout failed!', { position: 'top-center' });
         }
     };
 
+    // ✅ Handle click
     const handleItemClick = (item) => {
         if (item.action === 'logout') {
             handleLogout();
@@ -57,10 +48,12 @@ const RiderSidebar = ({ isOpen, setIsOpen }) => {
     };
 
     return (
-        <div className={`fixed left-0 top-0 h-full bg-gray-900 text-white transition-all duration-300 z-20 flex flex-col ${
-            isOpen ? 'w-64' : 'w-20'
-        }`}>
-            {/* Logo / Brand */}
+        <div
+            className={`fixed left-0 top-0 h-full bg-gray-900 text-white transition-all duration-300 z-20 flex flex-col ${
+                isOpen ? 'w-64' : 'w-20'
+            }`}
+        >
+            {/* ✅ Logo */}
             <div className="flex items-center justify-center p-4 border-b border-gray-700 h-16">
                 {isOpen ? (
                     <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -71,7 +64,7 @@ const RiderSidebar = ({ isOpen, setIsOpen }) => {
                 )}
             </div>
 
-            {/* Navigation Menu - grows to fill space */}
+            {/* ✅ Menu */}
             <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
                 {menuItems.map((item, index) => (
                     <Link
@@ -89,22 +82,24 @@ const RiderSidebar = ({ isOpen, setIsOpen }) => {
                 ))}
             </nav>
 
-             {/* Bottom Actions (Home & Logout) */}
+            {/* ✅ Bottom Actions */}
             <div className="border-t border-gray-700 p-4 space-y-1">
                 {bottomActions.map((item, index) => (
                     <button
                         key={index}
                         onClick={() => handleItemClick(item)}
                         className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ${
-                            item.isRed 
-                                ? 'hover:bg-red-900/30 text-red-400' 
+                            item.isRed
+                                ? 'hover:bg-red-900/30 text-red-400'
                                 : 'hover:bg-gray-800 text-gray-300'
                         }`}
                     >
                         {item.icon}
-                        {isOpen && <span className={`text-sm ${item.isRed ? 'text-red-500' : ''}`}>
-                            {item.label}
-                        </span>}
+                        {isOpen && (
+                            <span className={`text-sm ${item.isRed ? 'text-red-500' : ''}`}>
+                                {item.label}
+                            </span>
+                        )}
                     </button>
                 ))}
             </div>

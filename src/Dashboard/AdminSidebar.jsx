@@ -36,10 +36,8 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
         { path: '/dashboard/parcels', icon: <Package size={18} />, label: 'All Parcels' },
         // { path: '/dashboard/riders', icon: <Truck size={18} />, label: 'Delivery Riders' },
         // { path: '/dashboard/customers', icon: <Users size={18} />, label: 'Customers' },
-        { path: '/dashboard/tracking', icon: <MapPin size={18} />, label: 'Live Tracking' },
         { path: '/dashboard/payment-history', icon: <CreditCard size={18} />, label: 'Payment History' },
-        { path: '/dashboard/rider-applications', icon: <Bike size={18} />, label: 'Rider Applications' },
-        { path: '/dashboard/assgin-riders', icon: <RiEBike2Fill  size={18} /> , label: 'Assign Rider' },
+        { path: '/dashboard/tracking', icon: <MapPin size={18} />, label: 'Live Tracking' },
         
         // { path: '/dashboard/orders', icon: <ClipboardList size={18} />, label: 'Orders' },
         // { path: '/dashboard/earnings', icon: <DollarSign size={18} />, label: 'Earnings' },

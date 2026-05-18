@@ -29,6 +29,7 @@ import AdminRoute from "./AdminRoute";
 import AssignRider from "../../Dashboard/AssignRider/AssignRider";
 import RiderDashboardLayout from "../../RiderDashboardLayout/RiderDashboardLayout";
 import AdminDashboardLayout from "../../AdminDashboardLayout/AdminDashboardLayout";
+import AdminOverview from "../../AdminDashboardLayout/AdminOverview";
 
 
 // Add error handling for fetch requests
@@ -158,7 +159,7 @@ export const router = createBrowserRouter([
                     { path: "rider-applications", element: <RiderApplications /> },
                     // { path: "users-management", element: <AdminRoute> <UserManagement></UserManagement>  </AdminRoute> },
                     { path: "users-management", element:   <UserManagement></UserManagement> },
-                    { path: "assgin-riders", element:   <AssignRider></AssignRider> },
+                    
                 ],
             },
             // {
@@ -175,8 +176,8 @@ export const router = createBrowserRouter([
             {
                 element: <RiderDashboardLayout></RiderDashboardLayout>  ,
                 children: [
-                    { index: true, element: <Overview /> },
-                    { index: "dashboard", element: <Overview /> },
+                    { index: true, element: <RiderApplications /> },  
+                    // { path: "assign-riders", element:   <AssignRider></AssignRider> },
                 ],
             }, 
         ],
@@ -189,8 +190,8 @@ export const router = createBrowserRouter([
             {
                 element:  <AdminDashboardLayout></AdminDashboardLayout>,
                 children: [
-                    { index: true, element: <Overview /> },
-                    { index: "dashboard", element: <Overview /> },
+                    { index: true, element:  <AdminOverview></AdminOverview> },
+                    // { index: "admin-dashboard", element: <AdminOverview></AdminOverview> },
                 ],
             }, 
         ],

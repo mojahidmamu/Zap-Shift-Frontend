@@ -18,7 +18,7 @@ const AssignRider = () => {
 
     return (
         <div>
-            <h1>Asign Rider.. {percels.length}</h1>
+            <h1 className='text-2xl font-bold'>Asign Rider.. {percels.length}</h1>
         </div>
     );
 };
