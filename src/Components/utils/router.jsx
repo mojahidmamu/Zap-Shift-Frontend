@@ -30,6 +30,7 @@ import AssignRider from "../../Dashboard/AssignRider/AssignRider";
 import RiderDashboardLayout from "../../RiderDashboardLayout/RiderDashboardLayout";
 import AdminDashboardLayout from "../../AdminDashboardLayout/AdminDashboardLayout";
 import AdminOverview from "../../AdminDashboardLayout/AdminOverview";
+import Contact from "../Contact/Contact";
 
 
 // Add error handling for fetch requests
@@ -51,6 +52,7 @@ const servicesPromise = fetchWithErrorHandling("/services.json", []);
  
 
 export const router = createBrowserRouter([
+  // Main Layout: 
   {
     path: "/",
     Component: MainLayout,
@@ -63,8 +65,8 @@ export const router = createBrowserRouter([
           path: "/coverage", 
           element: <Coverage></Coverage>,
           loader: async () => {
-          const res = await fetch("/serviceCenters.json");
-          return res.json();
+            const res = await fetch("/serviceCenters.json");
+            return res.json();
           },
         }, 
         {
@@ -107,17 +109,17 @@ export const router = createBrowserRouter([
             path: "/parcels/edit/:id",
             element: <EditParcel />,
         },
-        {
-          path: "/pricing", 
-          element: <div className="max-w-6xl mx-auto px-4 py-12"><h1 className='font-bold text-2xl'>Pricing Page Coming Soon!</h1></div>,
-        }, 
+        // {
+        //   path: "/pricing", 
+        //   element: <div className="max-w-6xl mx-auto px-4 py-12"><h1 className='font-bold text-2xl'>Pricing Page Coming Soon!</h1></div>,
+        // }, 
         {
           path: "/blog", 
           element: <div className="max-w-6xl mx-auto px-4 py-12"><h1 className='font-bold text-2xl'>Blog Page Coming Soon!</h1></div>,
         }, 
         { 
           path: "/contact",
-          element: <div className="max-w-6xl mx-auto px-4 py-12"><h1 className='font-bold text-2xl'>Contact Page Coming Soon!</h1></div>,
+          element: <Contact></Contact>,
         }, 
         { 
           path: "/profile",
@@ -125,6 +127,7 @@ export const router = createBrowserRouter([
         }
     ]
   },
+  // Login and authentication: 
   {
     path: "/", 
     Component: AuthLayout, 

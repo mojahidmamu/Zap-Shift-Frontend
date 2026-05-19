@@ -82,16 +82,7 @@ const NavBar = () => {
                     Send Parcel
                 </NavLink>
             </li>
-            <li>
-                <NavLink 
-                    to="/services" 
-                    className={({ isActive }) => 
-                        `hover:text-purple-400 transition-colors duration-200 ${isActive ? 'text-purple-400 border-b-2 border-purple-400' : ''}`
-                    }
-                >
-                    Services
-                </NavLink>
-            </li>
+             
             <li>
                 <NavLink 
                     to="/rider" 
