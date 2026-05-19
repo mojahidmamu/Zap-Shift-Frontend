@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import toast from 'react-hot-toast'; // ✅ add this line
 
-const UserManagement = () => {
+const AdminUserManagement = () => {
     const queryClient = useQueryClient();
     const [selectedUser, setSelectedUser] = useState(null);
     const [searchText, setSearchText] = useState('');
@@ -82,6 +82,29 @@ const UserManagement = () => {
                 User Management ({users.length})
             </h1>
 
+            <h2>Search Text: {searchText}</h2>
+            {/* Search  */}
+            <label className="input">
+                <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2.5"
+                    fill="none"
+                    stroke="currentColor"
+                    >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                    </g>
+                </svg>
+                <input 
+                    onChange={(e) => setSearchText(e.target.value)}
+                    type="search"
+                    className="grow my-2" 
+                    placeholder="Search user by name " /> 
+                 
+            </label>
+
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
                     <thead>
@@ -113,6 +136,23 @@ const UserManagement = () => {
                                     </span>
                                 </td>
                                 <td>
+                                    {user.role === 'admin' ? (
+                                        <button
+                                            onClick={() => handleRemoveAdmin(user)}
+                                            className="btn btn-warning btn-sm"
+                                            disabled={updateRoleMutation.isLoading}
+                                        >
+                                            Remove Admin
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={() => handleMakeAdmin(user)}
+                                            className="btn btn-success btn-sm"
+                                            disabled={updateRoleMutation.isLoading}
+                                        >
+                                            Make Admin
+                                        </button>
+                                    )}
                                     <button
                                         onClick={() => setSelectedUser(user)}
                                         className="btn btn-secondary btn-sm ml-2"
@@ -152,4 +192,4 @@ const UserManagement = () => {
     );
 };
 
-export default UserManagement;
+export default AdminUserManagement;

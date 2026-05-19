@@ -32,6 +32,7 @@ import AdminDashboardLayout from "../../AdminDashboardLayout/AdminDashboardLayou
 import AdminOverview from "../../AdminDashboardLayout/AdminOverview";
 import Contact from "../Contact/Contact";
 import DeliveryRider from "../../AdminDashboardLayout/DeliveryRider";
+import AdminUserManagement from "../../AdminDashboardLayout/AdminUserManagement";
 
 
 // Add error handling for fetch requests
@@ -120,7 +121,11 @@ export const router = createBrowserRouter([
         }, 
         { 
           path: "/contact",
-          element: <Contact></Contact>,
+          element: (
+            <PrivateRoute>
+              <SendPercel></SendPercel>,
+            </PrivateRoute>
+          )  
         }, 
         { 
           path: "/profile",
@@ -205,7 +210,7 @@ export const router = createBrowserRouter([
                     { path: "payment-history", element: <PaymentHistory  /> }, 
                     { path: "rider-applications", element: <RiderApplications /> },
                     // { path: "users-management", element: <AdminRoute> <UserManagement></UserManagement>  </AdminRoute> },
-                    { path: "users-management", element:   <UserManagement></UserManagement> },
+                    { path: "users-management", element:   <AdminUserManagement></AdminUserManagement> },
                     { index: "rider-application", element: <RiderApplications /> }, 
                     { path: "assign-riders", element:   <AssignRider></AssignRider> },
                     { path: "delivery-riders", element: <DeliveryRider></DeliveryRider> },

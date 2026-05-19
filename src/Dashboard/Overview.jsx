@@ -6,7 +6,7 @@ import { AuthContext } from '../context/AuthContext/AuthContext';
 import { getParcels } from '../services/api';
 import { Link } from 'react-router-dom';
 
-const Overview = () => {
+const  Overview = () => {
     const { user } = useContext(AuthContext);
 
     // Fetch all parcels
