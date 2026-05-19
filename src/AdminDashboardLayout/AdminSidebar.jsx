@@ -23,7 +23,14 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
 
     // Main navigation items
     const menuItems = [
-        { path: '/admin-dashboard', icon: <UserStar size={18} />, label: 'Admin' }, 
+        { path: '/admin-dashboard', icon: <UserStar size={18} />, label: 'Admin Dashboard' },  
+        { path: '/admin-dashboard/users-management', icon: <UsersIcon size={18} />, label: 'All Users' },
+        { path: '/admin-dashboard/parcels', icon: <Package size={18} />, label: 'All Parcels' },
+        // { path: '/dashboard/riders', icon: <Truck size={18} />, label: 'Delivery Riders' },
+        // { path: '/dashboard/customers', icon: <Users size={18} />, label: 'Customers' },
+        { path: '/admin-dashboard/payment-history', icon: <CreditCard size={18} />, label: 'Payment History' },
+        { path: '/admin-dashboard/tracking', icon: <MapPin size={18} />, label: 'Live Tracking' },
+        { path: '/admin-dashboard/settings', icon: <Settings size={18} />, label: 'Setting' }, 
         
     ];
 
@@ -33,10 +40,7 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
         { path: '#', icon: <LogOut className='text-red-600' size={18} />,  label: 'Logout', action: 'logout' ,  isRed: true },
     ];
 
-    const isActive = (path) => {
-        if (path === '/dashboard') return location.pathname === '/dashboard';
-        return location.pathname.startsWith(path);
-    };
+     const isActive = (path) => location.pathname === path;
 
     const handleLogout = async () => {
         const { success, error } = await logoutUser();
@@ -58,13 +62,13 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
     };
 
     return (
-        <div className={`fixed left-0 top-0 h-full bg-gray-900 text-white transition-all duration-300 z-20 flex flex-col ${
+        <div className={`fixed left-0 top-0 h-full bg-purple-900 text-white transition-all duration-300 z-20 flex flex-col ${
             isOpen ? 'w-64' : 'w-20'
         }`}>
             {/* Logo / Brand */}
             <div className="flex items-center justify-center p-4 border-b border-gray-700 h-16">
                 {isOpen ? (
-                    <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-400 bg-clip-text text-transparent">
                         Zap Shift Admin
                     </span>
                 ) : (
@@ -78,7 +82,7 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
                     <Link
                         key={index}
                         to={item.path}
-                        className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ${
+                        className={`flex items-center gap-3 px-3 font-bold underline py-2 rounded-lg transition-all duration-200 ${
                             isActive(item.path)
                                 ? 'bg-purple-600 text-white'
                                 : 'hover:bg-gray-800 text-gray-300'

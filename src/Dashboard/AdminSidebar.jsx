@@ -43,8 +43,8 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
         // { path: '/dashboard/earnings', icon: <DollarSign size={18} />, label: 'Earnings' },
         // { path: '/dashboard/statistics', icon: <TrendingUp size={18} />, label: 'Statistics' },
         // { path: '/dashboard/disputes', icon: <HelpCircle size={18} />, label: 'Disputes' },
-        // { path: '/dashboard/reports', icon: <FileText size={18} />, label: 'Reports' },
-        { path: '/dashboard/settings', icon: <Settings size={18} />, label: 'Settings' },
+        // // { path: '/dashboard/reports', icon: <FileText size={18} />, label: 'Reports' },
+        // { path: '/dashboard/settings', icon: <Settings size={18} />, label: 'Settings' },
     ];
 
     // Bottom action items

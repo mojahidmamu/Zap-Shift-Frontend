@@ -18,7 +18,7 @@ const AdminDashboardLayout = () => {
                     <button onClick={() => setSidebarOpen(!sidebarOpen)} className="focus:outline-none">
                         <Menu className="w-5 h-5 text-gray-700" />
                     </button>
-                    <h1 className="ml-4 font-semibold text-gray-800">Admin Dashboard</h1>
+                    <h1 className="ml-4 font-bold text-gray-800 ">Admin Dashboard</h1>
                 </div>
 
                 {/* Page content - nested routes will render here */}
