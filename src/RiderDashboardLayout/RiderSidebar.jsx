@@ -14,7 +14,7 @@ const RiderSidebar = ({ isOpen }) => {
     // ✅ Navigation items
     const menuItems = [
         { path: '/rider-dashboard', icon: <RiEBike2Fill size={18} />, label: 'Rider Applications' },
-        // { path: '/rider-dashboard/assign-riders', icon: <RiEBike2Fill size={18} />, label: 'Assign Rider' },
+        { path: '/rider-dashboard/assign-riders', icon: <RiEBike2Fill size={18} />, label: 'Assign Rider' },
     ];
 
     // ✅ Bottom actions
@@ -24,7 +24,7 @@ const RiderSidebar = ({ isOpen }) => {
     ];
 
     // ✅ Active route check
-    const isActive = (path) => location.pathname.startsWith(path);
+    const isActive = (path) => location.pathname === path;
 
     // ✅ Logout handler
     const handleLogout = async () => {

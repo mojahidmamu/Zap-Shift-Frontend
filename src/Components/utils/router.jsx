@@ -176,8 +176,8 @@ export const router = createBrowserRouter([
             {
                 element: <RiderDashboardLayout></RiderDashboardLayout>  ,
                 children: [
-                    { index: true, element: <RiderApplications /> },  
-                    // { path: "assign-riders", element:   <AssignRider></AssignRider> },
+                    { index: true, element: <RiderApplications /> },   
+                    { path: "assign-riders", element:   <AssignRider></AssignRider> },
                 ],
             }, 
         ],
