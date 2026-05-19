@@ -26,10 +26,12 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
         { path: '/admin-dashboard', icon: <UserStar size={18} />, label: 'Admin Dashboard' },  
         { path: '/admin-dashboard/users-management', icon: <UsersIcon size={18} />, label: 'All Users' },
         { path: '/admin-dashboard/parcels', icon: <Package size={18} />, label: 'All Parcels' },
-        // { path: '/dashboard/riders', icon: <Truck size={18} />, label: 'Delivery Riders' },
         // { path: '/dashboard/customers', icon: <Users size={18} />, label: 'Customers' },
         { path: '/admin-dashboard/payment-history', icon: <CreditCard size={18} />, label: 'Payment History' },
         { path: '/admin-dashboard/tracking', icon: <MapPin size={18} />, label: 'Live Tracking' },
+        { path: '/admin-dashboard/rider-applications', icon: <RiEBike2Fill size={18} />, label: 'Rider Applications' },
+        { path: '/admin-dashboard/assign-riders', icon: <RiEBike2Fill size={18} />, label: 'Assign Rider' },
+        { path: '/admin-dashboard/delivery-riders', icon: <Truck size={18} />, label: 'Delivery Riders' },
         { path: '/admin-dashboard/settings', icon: <Settings size={18} />, label: 'Setting' }, 
         
     ];

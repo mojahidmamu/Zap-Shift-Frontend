@@ -31,6 +31,7 @@ import RiderDashboardLayout from "../../RiderDashboardLayout/RiderDashboardLayou
 import AdminDashboardLayout from "../../AdminDashboardLayout/AdminDashboardLayout";
 import AdminOverview from "../../AdminDashboardLayout/AdminOverview";
 import Contact from "../Contact/Contact";
+import DeliveryRider from "../../AdminDashboardLayout/DeliveryRider";
 
 
 // Add error handling for fetch requests
@@ -205,6 +206,9 @@ export const router = createBrowserRouter([
                     { path: "rider-applications", element: <RiderApplications /> },
                     // { path: "users-management", element: <AdminRoute> <UserManagement></UserManagement>  </AdminRoute> },
                     { path: "users-management", element:   <UserManagement></UserManagement> },
+                    { index: "rider-application", element: <RiderApplications /> }, 
+                    { path: "assign-riders", element:   <AssignRider></AssignRider> },
+                    { path: "delivery-riders", element: <DeliveryRider></DeliveryRider> },
                 ],
             }, 
         ],
