@@ -32,7 +32,7 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
         //         },
         //     ]
         //     : []), 
-        { path: '/dashboard/users-management', icon: <UsersIcon size={18} />, label: 'All Users' },
+        // { path: '/dashboard/users-management', icon: <UsersIcon size={18} />, label: 'All Users' },
         { path: '/dashboard/parcels', icon: <Package size={18} />, label: 'All Parcels' },
         // { path: '/dashboard/riders', icon: <Truck size={18} />, label: 'Delivery Riders' },
         // { path: '/dashboard/customers', icon: <Users size={18} />, label: 'Customers' },

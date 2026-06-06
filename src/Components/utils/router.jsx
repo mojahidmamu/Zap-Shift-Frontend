@@ -29,10 +29,10 @@ import AdminRoute from "./AdminRoute";
 import AssignRider from "../../Dashboard/AssignRider/AssignRider";
 import RiderDashboardLayout from "../../RiderDashboardLayout/RiderDashboardLayout";
 import AdminDashboardLayout from "../../AdminDashboardLayout/AdminDashboardLayout";
-import AdminOverview from "../../AdminDashboardLayout/AdminOverview";
-import Contact from "../Contact/Contact";
+import AdminOverview from "../../AdminDashboardLayout/AdminOverview"; 
 import DeliveryRider from "../../AdminDashboardLayout/DeliveryRider";
 import AdminUserManagement from "../../AdminDashboardLayout/AdminUserManagement";
+import ContactForm from "../Contact/ContactForm";
 
 
 // Add error handling for fetch requests
@@ -123,7 +123,7 @@ export const router = createBrowserRouter([
           path: "/contact",
           element: (
             <PrivateRoute>
-              <SendPercel></SendPercel>,
+              <ContactForm></ContactForm>,
             </PrivateRoute>
           )  
         }, 
