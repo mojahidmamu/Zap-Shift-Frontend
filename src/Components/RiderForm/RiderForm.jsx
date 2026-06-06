@@ -53,11 +53,11 @@ const RiderForm = () => {
       const response = await axios.post('http://localhost:5000/api/rider/apply', applicationData, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
-      toast.success('আবেদন জমা দেওয়া হয়েছে!');
+      toast.success('আবেদন জমা দেওয়া হয়েছে!...');
       reset();
       navigate('/dashboard');
     } catch (error) {
-      toast.error(error.response?.data?.message || 'জমা দিতে ব্যর্থ হয়েছে।');
+      toast.error(error.response?.data?.message || 'জমা দিতে ব্যর্থ হয়েছে।...');
     } finally {
       setIsSubmitting(false);
     }
