@@ -12,12 +12,14 @@ const RiderApplications = () => {
 
   const fetchApplications = async () => {
     try {
-      const { data } = await axios.get(`/api/rider/applications?status=${statusFilter}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const { data } = await axios.get(
+        `http://localhost:5000/api/rider/applications?status=${statusFilter}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       setApplications(data);
     } catch (err) {
       toast.error('আবেদন লোড করতে ব্যর্থ হয়েছে');
+      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -38,9 +40,11 @@ const RiderApplications = () => {
     });
     if (result.isConfirmed) {
       try {
-        await axios.put(`/api/rider/applications/${id}`, { status: 'approved' }, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await axios.put(
+          `http://localhost:5000/api/rider/applications/${id}`,
+          { status: 'approved' },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
         toast.success('আবেদন অনুমোদিত হয়েছে');
         fetchApplications();
       } catch (err) {
@@ -61,9 +65,11 @@ const RiderApplications = () => {
     });
     if (reason) {
       try {
-        await axios.put(`/api/rider/applications/${id}`, { status: 'rejected', rejectionReason: reason }, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await axios.put(
+          `http://localhost:5000/api/rider/applications/${id}`,
+          { status: 'rejected', rejectionReason: reason },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
         toast.success('আবেদন প্রত্যাখ্যান করা হয়েছে');
         fetchApplications();
       } catch (err) {
@@ -101,7 +107,7 @@ const RiderApplications = () => {
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">🚚 রাইডার আবেদনসমূহ</h1>
-        {/* <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2">
           <Filter size={18} />
           <select
             value={statusFilter}
@@ -113,10 +119,10 @@ const RiderApplications = () => {
             <option value="approved">অনুমোদিত</option>
             <option value="rejected">প্রত্যাখ্যাত</option>
           </select>
-        </div> */}
+        </div>
       </div>
 
-      {/* {applications.length === 0 ? (
+      {applications.length === 0 ? (
         <div className="text-center text-gray-500 py-12">কোনো আবেদন পাওয়া যায়নি</div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -152,7 +158,7 @@ const RiderApplications = () => {
             </div>
           ))}
         </div>
-      )} */}
+      )}
     </div>
   );
 };
