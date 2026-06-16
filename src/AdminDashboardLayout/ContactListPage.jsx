@@ -3,15 +3,25 @@ import React, { useEffect, useState } from 'react';
 const ContactListPage = () => {
 
     const [messages, setMessages] = useState([]);
+    const [selectedMessage, setSelectedMessage] = useState(null);
+
+    const fetchMessages = async () => {
+        try {
+        const res = await fetch("http://localhost:5000/contacts");
+        const data = await res.json();
+        setMessages(data);
+        } catch (error) {
+        console.error(error);
+        }
+    };
+
     useEffect(() => {
-        fetch("http://localhost:5000/contacts")
-            .then( (res) => res.json())
-            .then( (data) => setMessages(data));
-    }, [])
+        fetchMessages();
+    }, []);
 
 
     return (
-        <div className="p-6">
+        <div className="py-2">
             <h2 className="text-2xl font-bold mb-5">
                 Contact Messages
             </h2>
