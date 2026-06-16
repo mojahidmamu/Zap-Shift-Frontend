@@ -5,7 +5,7 @@ import {
     ClipboardList, DollarSign, Settings, FileText, 
     HelpCircle, TrendingUp, Home, LogOut, 
     CreditCard,
-    Bike,
+    Bike, Mail,
     UsersIcon,
     UserStar
 } from 'lucide-react';  
@@ -32,7 +32,8 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
         { path: '/admin-dashboard/rider-applications', icon: <RiEBike2Fill size={18} />, label: 'Rider Applications' },
         { path: '/admin-dashboard/assign-riders', icon: <RiEBike2Fill size={18} />, label: 'Assign Rider' },
         { path: '/admin-dashboard/delivery-riders', icon: <Truck size={18} />, label: 'Delivery Riders' },
-        { path: '/admin-dashboard/settings', icon: <Settings size={18} />, label: 'Setting' }, 
+        { path: '/admin-dashboard/contact-list', icon: <Mail size={18} />, label: 'Contact List' },
+        { path: '/admin-dashboard/settings', icon: <Settings size={18} />, label: 'Settings' }, 
         
     ];
 
