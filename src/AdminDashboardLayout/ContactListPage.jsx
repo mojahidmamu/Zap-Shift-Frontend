@@ -23,6 +23,7 @@ const ContactListPage = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Subject</th>
+                            <th>Message</th>
                             <th>Status</th>
                             <th>Date</th>
                         </tr>
@@ -32,28 +33,26 @@ const ContactListPage = () => {
                         {
                             messages.map(message => (
                                 <tr key={message._id}>
-                                    <td>{message.name}</td>
-                                    <td>{message.email}</td>
-                                    <td>{message.subject}</td>
-                                    <td>
-                                        <span
-                                            className={
-                                                message.status === "unread"
-                                                    ? "badge badge-error"
-                                                    : "badge badge-success"
-                                            }
-                                        >
-                                            {message.status}
-                                        </span>
-                                    </td>
+                                <td>{message.name}</td>
+                                <td>{message.email}</td>
+                                <td>{message.subject}</td>
+                                <td>{message.message}</td>
 
-                                    <td>
-                                        {
-                                            new Date(
-                                                message.createdAt
-                                            ).toLocaleDateString()
-                                        }
-                                    </td>
+                                <td>
+                                    <span
+                                    className={
+                                        message.status === "unread"
+                                        ? "badge badge-error"
+                                        : "badge badge-success"
+                                    }
+                                    >
+                                    {message.status}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    {new Date(message.createdAt).toLocaleDateString()}
+                                </td>
                                 </tr>
                             ))
                         }
