@@ -35,6 +35,7 @@ import AdminUserManagement from "../../AdminDashboardLayout/AdminUserManagement"
 import ContactForm from "../Contact/ContactForm";
 import MyRiderApplication from "../../Dashboard/Rider/MyRiderApplication";
 import ContactListPage from "../../AdminDashboardLayout/ContactListPage";
+import Blog from "../Blog/Blog";
 
 
 // Add error handling for fetch requests
@@ -112,14 +113,10 @@ export const router = createBrowserRouter([
         {
             path: "/parcels/edit/:id",
             element: <EditParcel />,
-        },
-        // {
-        //   path: "/pricing", 
-        //   element: <div className="max-w-6xl mx-auto px-4 py-12"><h1 className='font-bold text-2xl'>Pricing Page Coming Soon!</h1></div>,
-        // }, 
+        }, 
         {
           path: "/blog", 
-          element: <div className="max-w-6xl mx-auto px-4 py-12"><h1 className='font-bold text-2xl'>Blog Page Coming Soon!</h1></div>,
+          element: <Blog></Blog>,
         }, 
         { 
           path: "/contact",
