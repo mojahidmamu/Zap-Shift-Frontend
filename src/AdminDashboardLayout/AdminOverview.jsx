@@ -17,6 +17,10 @@ import {
 } from 'lucide-react';
 
 const AdminOverview = () => {
+  const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [statusFilter, setStatusFilter] = useState('all');
+  const token = localStorage.getItem('token');
 
     // Fetch users
     const { data: users = [], isLoading, error } = useQuery({
@@ -58,10 +62,33 @@ const AdminOverview = () => {
 
     const totalRevenue = payments.reduce((acc, curr) => acc + (curr.cost || 0), 0);
 
+    // Rider applications: 
+    const fetchApplications = async () => {
+      setLoading(true);
+      try {
+        const { data } = await axios.get(
+          `http://localhost:5000/api/rider/applications?status=${statusFilter}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setApplications(data);
+      } catch (err) {
+        console.error('Fetch error:', err);
+        toast.error('আবেদন লোড করতে ব্যর্থ হয়েছে');
+      } finally {
+        setLoading(false);
+      }
+  };
+
+  useEffect(() => {
+    fetchApplications();
+  }, [statusFilter]);
+
+  const totalRiders = applications.filter(app => app.status === 'approved').length;
+
   // Dummy data – replace with real API data later
   const stats = [
     { label: 'Total Users', value:  users.length, icon: <Users className="w-6 h-6" />, color: 'bg-blue-500', trend: '+12%' },
-    { label: 'Total Riders', value: '000', icon: <Truck className="w-6 h-6" />, color: 'bg-green-500', trend: '+8%' },
+    { label: 'Total Riders', value: totalRiders, icon: <Truck className="w-6 h-6" />, color: 'bg-green-500', trend: '+8%' },
     { label: 'Total Parcels', value: totalParcels, icon: <Package className="w-6 h-6" />, color: 'bg-purple-500', trend: '+23%' },
     { label: 'Revenue (BDT)', value: `৳ ${totalRevenue.toLocaleString()}`, icon: <DollarSign className="w-6 h-6" />, color: 'bg-yellow-500', trend: '+17%' },
     { label: 'Pending Riders', value: '0', icon: <Clock className="w-6 h-6" />, color: 'bg-orange-500', trend: '-2%' },

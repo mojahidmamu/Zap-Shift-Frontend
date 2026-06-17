@@ -36,6 +36,8 @@ import ContactForm from "../Contact/ContactForm";
 import MyRiderApplication from "../../Dashboard/Rider/MyRiderApplication";
 import ContactListPage from "../../AdminDashboardLayout/ContactListPage";
 import Blog from "../Blog/Blog";
+import AdminAssignRider from "../../AdminDashboardLayout/AdminAssignRider";
+import AdminParcels from "../../AdminDashboardLayout/AdminParcels";
 
 
 // Add error handling for fetch requests
@@ -202,7 +204,7 @@ export const router = createBrowserRouter([
                     // { index: "admin-dashboard", element: <AdminOverview></AdminOverview> },
                     { path: "settings", element: <Settings /> },
                     { index: "dashboard", element: <Overview /> },
-                    { path: "parcels", element: <AllPercel /> },
+                    { path: "parcels", element: <AdminParcels></AdminParcels> },
                     { path: "tracking", element: <Tracking /> },
                     { path: "payment/:parcelId", element: <Payment /> }, 
                     { path: "payment-success", element: <PaymentSuccess /> }, 
@@ -212,7 +214,7 @@ export const router = createBrowserRouter([
                     // { path: "users-management", element: <AdminRoute> <UserManagement></UserManagement>  </AdminRoute> },
                     { path: "users-management", element:   <AdminUserManagement></AdminUserManagement> },
                     { index: "rider-application", element: <RiderApplications /> }, 
-                    { path: "assign-riders", element:   <AssignRider></AssignRider> },
+                    { path: "assign-riders", element:    <AdminAssignRider></AdminAssignRider> },
                     { path: "delivery-riders", element: <DeliveryRider></DeliveryRider> }, 
                     { path: "contact-list", element: <ContactListPage /> },
                 ],

@@ -14,7 +14,7 @@ const RiderSidebar = ({ isOpen }) => {
     // ✅ Navigation items
     const menuItems = [
         { path: '/rider-dashboard', icon: <RiEBike2Fill size={18} />, label: 'My Rider Application' },
-        { path: '/rider-dashboard/assign-riders', icon: <RiEBike2Fill size={18} />, label: 'Assign Rider' },
+        { path: '/rider-dashboard/assign-riders', icon: <RiEBike2Fill size={18} />, label: 'My Assigned Parcels' },
     ];
 
     // ✅ Bottom actions
