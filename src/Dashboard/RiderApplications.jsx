@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import Swal from 'sweetalert2';
-import { Eye, CheckCircle, XCircle, Filter } from 'lucide-react';
+import { Clock, CheckCircle, XCircle, AlertCircle, Eye, Filter, RefreshCw } from 'lucide-react';
 
 const RiderApplications = () => {
   const [applications, setApplications] = useState([]);
@@ -11,6 +11,7 @@ const RiderApplications = () => {
   const token = localStorage.getItem('token');
 
   const fetchApplications = async () => {
+    setLoading(true);
     try {
       const { data } = await axios.get(
         `http://localhost:5000/api/rider/applications?status=${statusFilter}`,
@@ -18,8 +19,8 @@ const RiderApplications = () => {
       );
       setApplications(data);
     } catch (err) {
+      console.error('Fetch error:', err);
       toast.error('আবেদন লোড করতে ব্যর্থ হয়েছে');
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -36,7 +37,8 @@ const RiderApplications = () => {
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#10b981',
-      confirmButtonText: 'হ্যাঁ, অনুমোদন করুন'
+      confirmButtonText: 'হ্যাঁ, অনুমোদন করুন',
+      cancelButtonText: 'বাতিল'
     });
     if (result.isConfirmed) {
       try {
@@ -61,7 +63,8 @@ const RiderApplications = () => {
       inputPlaceholder: 'রাইডারকে জানানোর জন্য কারণ...',
       showCancelButton: true,
       confirmButtonColor: '#ef4444',
-      confirmButtonText: 'প্রত্যাখ্যান'
+      confirmButtonText: 'প্রত্যাখ্যান',
+      cancelButtonText: 'বাতিল'
     });
     if (reason) {
       try {
@@ -82,7 +85,7 @@ const RiderApplications = () => {
     Swal.fire({
       title: `${app.fullName} - বিস্তারিত`,
       html: `
-        <div style="text-align: left;">
+        <div style="text-align: left; max-height: 500px; overflow-y: auto;">
           <p><strong>ইমেইল:</strong> ${app.email}</p>
           <p><strong>ফোন:</strong> ${app.phone}</p>
           <p><strong>ঠিকানা:</strong> ${app.address}, ${app.city}</p>
@@ -101,62 +104,146 @@ const RiderApplications = () => {
     });
   };
 
-  if (loading) return <div className="text-center p-8">লোড হচ্ছে...</div>;
+  const statusConfig = {
+    pending: { icon: <Clock className="w-5 h-5" />, label: 'পেন্ডিং', bg: 'bg-yellow-100 text-yellow-800' },
+    approved: { icon: <CheckCircle className="w-5 h-5" />, label: 'অনুমোদিত', bg: 'bg-green-100 text-green-800' },
+    rejected: { icon: <XCircle className="w-5 h-5" />, label: 'প্রত্যাখ্যাত', bg: 'bg-red-100 text-red-800' }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-indigo-600 border-t-transparent mx-auto mb-4"></div>
+          <p className="text-gray-500">লোড হচ্ছে...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">🚚 রাইডার আবেদনসমূহ</h1>
-        <div className="flex items-center gap-2">
-          <Filter size={18} />
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="border rounded-lg px-3 py-1"
+    <div className="p-6 max-w-7xl mx-auto">
+      {/* Header with filter and refresh */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-800">🚚 রাইডার আবেদনসমূহ</h1>
+          <p className="text-gray-500 mt-1">মোট আবেদন: {applications.length} টি</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg shadow-sm border">
+            <Filter size={18} className="text-gray-400" />
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="bg-transparent outline-none text-sm font-medium text-gray-700"
+            >
+              <option value="all">সব</option>
+              <option value="pending">পেন্ডিং</option>
+              <option value="approved">অনুমোদিত</option>
+              <option value="rejected">প্রত্যাখ্যাত</option>
+            </select>
+          </div>
+          <button
+            onClick={fetchApplications}
+            className="p-2 bg-white rounded-lg shadow-sm border hover:bg-gray-50 transition"
+            title="রিফ্রেশ"
           >
-            <option value="all">সব</option>
-            <option value="pending">পেন্ডিং</option>
-            <option value="approved">অনুমোদিত</option>
-            <option value="rejected">প্রত্যাখ্যাত</option>
-          </select>
+            <RefreshCw size={18} className="text-gray-500" />
+          </button>
         </div>
       </div>
 
+      {/* Applications Grid */}
       {applications.length === 0 ? (
-        <div className="text-center text-gray-500 py-12">কোনো আবেদন পাওয়া যায়নি</div>
+        <div className="text-center py-16 bg-white rounded-2xl shadow-sm border">
+          <AlertCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <h3 className="text-xl font-semibold text-gray-600">কোনো আবেদন পাওয়া যায়নি</h3>
+          <p className="text-gray-400 mt-2">বর্তমানে {statusFilter === 'all' ? 'কোনো' : statusFilter} আবেদন নেই।</p>
+        </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {applications.map(app => (
-            <div key={app._id} className="bg-white rounded-xl shadow-md border p-5">
-              <div className="flex justify-between items-start">
-                <h3 className="font-bold text-lg">{app.fullName}</h3>
-                <span className={`text-xs px-2 py-1 rounded-full ${
-                  app.status === 'approved' ? 'bg-green-100 text-green-700' :
-                  app.status === 'rejected' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'
-                }`}>
-                  {app.status === 'approved' ? 'অনুমোদিত' : app.status === 'rejected' ? 'প্রত্যাখ্যাত' : 'পেন্ডিং'}
-                </span>
-              </div>
-              <p className="text-sm text-gray-600 mt-1">{app.vehicleType}</p>
-              <p className="text-sm text-gray-500">{app.city}</p>
-              <p className="text-xs text-gray-400 mt-2">আবেদন: {new Date(app.appliedAt).toLocaleDateString()}</p>
-              <div className="flex justify-end gap-3 mt-4">
-                <button onClick={() => showDetails(app)} className="text-blue-600 hover:bg-blue-50 p-2 rounded-lg">
-                  <Eye size={18} />
-                </button>
-                {app.status === 'pending' && (
-                  <>
-                    <button onClick={() => handleApprove(app._id)} className="text-green-600 hover:bg-green-50 p-2 rounded-lg">
-                      <CheckCircle size={18} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          {applications.map((app) => {
+            const status = statusConfig[app.status] || statusConfig.pending;
+            return (
+              <div
+                key={app._id}
+                className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+              >
+                {/* Card Header – Name + Status */}
+                <div className="px-5 pt-5 pb-3 border-b bg-gradient-to-r from-gray-50 to-white flex justify-between items-start">
+                  <div>
+                    <h3 className="font-bold text-lg text-gray-800">{app.fullName}</h3>
+                    <p className="text-sm text-gray-500">{app.email}</p>
+                  </div>
+                  <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${status.bg}`}>
+                    {status.icon}
+                    {status.label}
+                  </div>
+                </div>
+
+                {/* Card Body – Details */}
+                <div className="p-5 space-y-3">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                    <div>
+                      <span className="text-gray-500">ফোন:</span>
+                      <span className="ml-1 font-medium">{app.phone}</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500">যানবাহন:</span>
+                      <span className="ml-1 font-medium">{app.vehicleType}</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500">লাইসেন্স:</span>
+                      <span className="ml-1 font-medium">{app.licenseNumber}</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500">অভিজ্ঞতা:</span>
+                      <span className="ml-1 font-medium">{app.experienceYears} বছর</span>
+                    </div>
+                    <div className="col-span-2">
+                      <span className="text-gray-500">ঠিকানা:</span>
+                      <span className="ml-1 font-medium">{app.address}, {app.city}</span>
+                    </div>
+                    <div className="col-span-2">
+                      <span className="text-gray-500">আবেদনের তারিখ:</span>
+                      <span className="ml-1 font-medium text-gray-600">
+                        {new Date(app.appliedAt).toLocaleDateString('bn-BD', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex justify-end gap-2 pt-3 border-t">
+                    <button
+                      onClick={() => showDetails(app)}
+                      className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                      title="বিস্তারিত দেখুন"
+                    >
+                      <Eye size={18} />
                     </button>
-                    <button onClick={() => handleReject(app._id)} className="text-red-600 hover:bg-red-50 p-2 rounded-lg">
-                      <XCircle size={18} />
-                    </button>
-                  </>
-                )}
+                    {app.status === 'pending' && (
+                      <>
+                        <button
+                          onClick={() => handleApprove(app._id)}
+                          className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition"
+                          title="অনুমোদন করুন"
+                        >
+                          <CheckCircle size={18} />
+                        </button>
+                        <button
+                          onClick={() => handleReject(app._id)}
+                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
+                          title="প্রত্যাখ্যান করুন"
+                        >
+                          <XCircle size={18} />
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

@@ -61,7 +61,7 @@ const AdminOverview = () => {
   // Dummy data – replace with real API data later
   const stats = [
     { label: 'Total Users', value:  users.length, icon: <Users className="w-6 h-6" />, color: 'bg-blue-500', trend: '+12%' },
-    { label: 'Total Riders', value: '196', icon: <Truck className="w-6 h-6" />, color: 'bg-green-500', trend: '+8%' },
+    { label: 'Total Riders', value: '000', icon: <Truck className="w-6 h-6" />, color: 'bg-green-500', trend: '+8%' },
     { label: 'Total Parcels', value: totalParcels, icon: <Package className="w-6 h-6" />, color: 'bg-purple-500', trend: '+23%' },
     { label: 'Revenue (BDT)', value: `৳ ${totalRevenue.toLocaleString()}`, icon: <DollarSign className="w-6 h-6" />, color: 'bg-yellow-500', trend: '+17%' },
     { label: 'Pending Riders', value: '0', icon: <Clock className="w-6 h-6" />, color: 'bg-orange-500', trend: '-2%' },
