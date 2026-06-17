@@ -1,11 +1,12 @@
 import { useContext } from 'react';
-import { Navigate, Outlet } from 'react-router-dom'; 
+import { Navigate, Outlet } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 
 const ProtectedRoute = ({ children, adminOnly = false }) => {
   const { user, loading } = useContext(AuthContext);
 
-  // Show loading state while checking auth
+  console.log('ProtectedRoute:', { user, loading, adminOnly, path: window.location.pathname });
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -17,28 +18,30 @@ const ProtectedRoute = ({ children, adminOnly = false }) => {
     );
   }
 
-  // If not logged in, redirect to login
   if (!user) {
+    console.log('No user, redirecting to login');
     return <Navigate to="/login" replace />;
   }
 
-  // Admin-only routes check
   if (adminOnly) {
-    // Check if user is admin
     const role = user.role || localStorage.getItem('role');
+    console.log('Admin check - role:', role);
+
     if (role !== 'admin') {
+      console.log('Not admin, redirecting to forbidden');
       return <Navigate to="/forbidden" replace />;
     }
 
-    // Check if admin verification (OTP) is done
     const adminVerified = localStorage.getItem('adminVerified') === 'true';
+    console.log('Admin verified:', adminVerified);
+
     if (!adminVerified) {
+      console.log('Not verified, redirecting to admin-verification');
       return <Navigate to="/admin-verification" replace />;
     }
   }
 
-  // If children are provided (for custom components), render them
-  // Otherwise, render the outlet for nested routes
+  console.log('Rendering outlet/children');
   return children ? children : <Outlet />;
 };
 

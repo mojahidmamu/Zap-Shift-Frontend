@@ -38,7 +38,8 @@ import ContactListPage from "../../AdminDashboardLayout/ContactListPage";
 import Blog from "../Blog/Blog";
 import AdminAssignRider from "../../AdminDashboardLayout/AdminAssignRider";
 import AdminParcels from "../../AdminDashboardLayout/AdminParcels";
-import AdminVerification from "../../AdminDashboardLayout/Pages/AdminVerification";
+// import AdminVerification from "../../AdminDashboardLayout/Pages/AdminVerification";
+import NotFound from "../NotFound/NotFound";
 
 
 // Add error handling for fetch requests
@@ -196,7 +197,7 @@ export const router = createBrowserRouter([
   // Admin Dashboard: 
   {
     path: "/admin-dashboard",
-    element: <ProtectedRoute adminOnly={true}></ProtectedRoute>,
+    element: <ProtectedRoute></ProtectedRoute>,
     children: [
             {
                 element:  <AdminDashboardLayout></AdminDashboardLayout>,
@@ -213,7 +214,7 @@ export const router = createBrowserRouter([
                     { path: "rider-applications", element: <RiderApplications /> },
                     // { path: "users-management", element: <AdminRoute> <UserManagement></UserManagement>  </AdminRoute> },
                     { path: "users-management", element:   <AdminUserManagement></AdminUserManagement> },
-                    { index: "rider-application", element: <RiderApplications /> }, 
+                    { path: "rider-application", element: <RiderApplications /> }, 
                     { path: "assign-riders", element:    <AdminAssignRider></AdminAssignRider> },
                     { path: "delivery-riders", element: <DeliveryRider></DeliveryRider> }, 
                     { path: "contact-list", element: <ContactListPage /> },
@@ -223,8 +224,13 @@ export const router = createBrowserRouter([
   }, 
 
   // OTP Verification Route:
+  // {
+  //   path: "/admin-verification",
+  //   element: <AdminVerification></AdminVerification>,
+  // }, 
+  // ===== CATCH-ALL 404 =====
   {
-    path: "/admin-verification",
-    element: <AdminVerification></AdminVerification>,
-  }, 
+    path: "*",
+    element: <NotFound></NotFound>,
+  },
 ]);
