@@ -38,6 +38,7 @@ import ContactListPage from "../../AdminDashboardLayout/ContactListPage";
 import Blog from "../Blog/Blog";
 import AdminAssignRider from "../../AdminDashboardLayout/AdminAssignRider";
 import AdminParcels from "../../AdminDashboardLayout/AdminParcels";
+import AdminVerification from "../../AdminDashboardLayout/Pages/AdminVerification";
 
 
 // Add error handling for fetch requests
@@ -195,15 +196,14 @@ export const router = createBrowserRouter([
   // Admin Dashboard: 
   {
     path: "/admin-dashboard",
-    element: <ProtectedRoute></ProtectedRoute>,
+    element: <ProtectedRoute adminOnly={true}></ProtectedRoute>,
     children: [
             {
                 element:  <AdminDashboardLayout></AdminDashboardLayout>,
                 children: [
-                    { index: true, element:  <AdminOverview></AdminOverview> },
-                    // { index: "admin-dashboard", element: <AdminOverview></AdminOverview> },
+                    { index: true, element:  <AdminOverview></AdminOverview> }, 
                     { path: "settings", element: <Settings /> },
-                    { index: "dashboard", element: <Overview /> },
+                    { path: "dashboard", element: <Overview /> },
                     { path: "parcels", element: <AdminParcels></AdminParcels> },
                     { path: "tracking", element: <Tracking /> },
                     { path: "payment/:parcelId", element: <Payment /> }, 
@@ -220,5 +220,11 @@ export const router = createBrowserRouter([
                 ],
             }, 
         ],
-  }
+  }, 
+
+  // OTP Verification Route:
+  {
+    path: "/admin-verification",
+    element: <AdminVerification></AdminVerification>,
+  }, 
 ]);
